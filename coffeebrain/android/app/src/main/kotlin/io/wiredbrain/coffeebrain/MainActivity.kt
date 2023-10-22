@@ -1,4 +1,4 @@
-package io.wiredbrain.coffeebrain
+package io.nasuapps.darkcoffee
 
 import io.flutter.embedding.android.FlutterActivity
 

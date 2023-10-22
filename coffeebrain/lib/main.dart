@@ -1,11 +1,12 @@
 import 'dart:async';
 
-import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'coffee_app.dart';
+import 'firebase_options.dart';
 import 'helpers/src/handle_background_message.dart';
 
 bool get isInDebugMode {
@@ -21,7 +22,9 @@ Future<void> main() async {
   runZonedGuarded<Future<void>>(() async {
     await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 
-    await Firebase.initializeApp();
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
 
     FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
 
