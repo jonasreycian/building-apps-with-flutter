@@ -1,3 +1,4 @@
+import 'package:brewedcoffee/app/constants.dart';
 import 'package:brewedcoffee/app/models/models.dart';
 import 'package:brewedcoffee/app/screens/coffee_item.dart';
 import 'package:brewedcoffee/app/services/services.dart';
@@ -28,10 +29,9 @@ class _MenuListState extends State<MenuList> {
   Widget build(BuildContext context) {
     return AnimatedList(
       key: listKey,
-      initialItemCount: _items.length,
       itemBuilder: (context, index, Animation<double> animation) {
         return CoffeeItem(
-          coffee: _items[index],
+          coffee: coffees[index],
           animation: animation,
         );
       },
@@ -40,9 +40,10 @@ class _MenuListState extends State<MenuList> {
 
   Future<void> _loadItems() async {
     final coffees = await _firestoreService.getCoffees().first;
+    // final coffeesList = coffees;
 
     for (final item in coffees) {
-      await Future.delayed(const Duration(milliseconds: 80));
+      // await Future.delayed(const Duration(milliseconds: 80));
       _items.add(item);
       if (listKey.currentState != null) {
         listKey.currentState!.insertItem(_items.length - 1);

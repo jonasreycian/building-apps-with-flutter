@@ -3,6 +3,8 @@ import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
 import 'package:brewedcoffee/app/helpers/helpers.dart';
+import 'package:brewedcoffee/firebase_options.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
@@ -28,31 +30,6 @@ Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
   FlutterError.onError = (FlutterErrorDetails details) {
     log(details.exceptionAsString(), stackTrace: details.stack);
   };
-  WidgetsFlutterBinding.ensureInitialized();
 
-  await runZonedGuarded<Future<void>>(() async {
-    Bloc.observer = const AppBlocObserver();
-
-    // Add cross-flavor configuration here
-    await SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp,
-    ]);
-
-    // TODO: Initialize Firebase
-
-    FirebaseMessaging.onBackgroundMessage(
-      firebaseMessagingBackgroundHandler,
-    );
-
-    runApp(await builder());
-  }, (error, stackTrace) async {
-    if (kDebugMode) {
-      // in development, print error and stack trace
-      print('$error');
-      print('$stackTrace');
-    } else {
-      log('Caught Dart Error!');
-      // report to a error tracking system in production
-    }
-  });
+  runApp(await builder());
 }

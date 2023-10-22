@@ -1,4 +1,4 @@
-package io.tuklasapplabs.brewedcoffee.brewedcoffee
+package io.tuklasapplabs.brewedcoffee
 
 import io.flutter.embedding.android.FlutterActivity
 

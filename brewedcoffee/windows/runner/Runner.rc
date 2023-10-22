@@ -89,11 +89,11 @@ BEGIN
     BEGIN
         BLOCK "040904e4"
         BEGIN
-            VALUE "CompanyName", "io.tuklasapplabs.brewedcoffee.brewedcoffee" "\0"
+            VALUE "CompanyName", "io.tuklasapplabs.brewedcoffee" "\0"
             VALUE "FileDescription", "brewedcoffee" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
             VALUE "InternalName", "brewedcoffee" "\0"
-            VALUE "LegalCopyright", "Copyright (C) 2022 io.tuklasapplabs.brewedcoffee.brewedcoffee. All rights reserved." "\0"
+            VALUE "LegalCopyright", "Copyright (C) 2022 io.tuklasapplabs.brewedcoffee. All rights reserved." "\0"
             VALUE "OriginalFilename", "brewedcoffee.exe" "\0"
             VALUE "ProductName", "Brewedcoffee" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"

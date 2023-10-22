@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="io.tuklasapplabs.brewedcoffee.brewedcoffee">
+    package="io.tuklasapplabs.brewedcoffee">
    <application
         android:label="${appName}"
         android:name="${applicationName}"
