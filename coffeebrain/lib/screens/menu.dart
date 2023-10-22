@@ -116,7 +116,7 @@ class _MenuScreenState extends State<MenuScreen> {
         await _messagingService.initialize();
         if (_messagingService.userDeviceToken != null) {
           await _firestoreService.registerUserToken(
-            token: _messagingService.userDeviceToken,
+            token: _messagingService.userDeviceToken!,
             userId: _authService.currentUser!.uid,
           );
         }

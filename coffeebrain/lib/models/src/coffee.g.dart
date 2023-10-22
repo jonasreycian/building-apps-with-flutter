@@ -6,18 +6,17 @@ part of 'coffee.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-Coffee _$CoffeeFromJson(Map<String, dynamic> json) {
-  return Coffee(
-    icon: json['icon'] as int,
-    id: json['id'] as String,
-    name: json['name'] as String,
-    price: json['price'] as int,
-  );
-}
+_$CoffeeImpl _$$CoffeeImplFromJson(Map<String, dynamic> json) => _$CoffeeImpl(
+      icon: json['icon'] as int,
+      id: json['id'] as String,
+      name: json['name'] as String,
+      price: json['price'] as int,
+    );
 
-Map<String, dynamic> _$CoffeeToJson(Coffee instance) => <String, dynamic>{
-      'id': instance.id,
+Map<String, dynamic> _$$CoffeeImplToJson(_$CoffeeImpl instance) =>
+    <String, dynamic>{
       'icon': instance.icon,
+      'id': instance.id,
       'name': instance.name,
       'price': instance.price,
     };

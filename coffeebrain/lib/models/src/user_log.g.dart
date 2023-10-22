@@ -6,47 +6,22 @@ part of 'user_log.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-UserLog _$UserLogFromJson(Map<String, dynamic> json) {
-  return UserLog(
-    id: json['id'] as String?,
-    activity: _$enumDecode(_$ActivityEnumMap, json['activity']),
-    created: UserLog._fromJson(json['created']),
-    userId: json['userId'] as String,
-  );
-}
+_$UserLogImpl _$$UserLogImplFromJson(Map<String, dynamic> json) =>
+    _$UserLogImpl(
+      id: json['id'] as String?,
+      activity: $enumDecode(_$ActivityEnumMap, json['activity']),
+      created:
+          const DateTimeConverter().fromJson(json['created'] as FieldValue),
+      userId: json['userId'] as String,
+    );
 
-Map<String, dynamic> _$UserLogToJson(UserLog instance) => <String, dynamic>{
-      'activity': _$ActivityEnumMap[instance.activity],
-      'created': UserLog._toJson(instance.created),
+Map<String, dynamic> _$$UserLogImplToJson(_$UserLogImpl instance) =>
+    <String, dynamic>{
       'id': instance.id,
+      'activity': _$ActivityEnumMap[instance.activity]!,
+      'created': const DateTimeConverter().toJson(instance.created),
       'userId': instance.userId,
     };
-
-K _$enumDecode<K, V>(
-  Map<K, V> enumValues,
-  Object? source, {
-  K? unknownValue,
-}) {
-  if (source == null) {
-    throw ArgumentError(
-      'A value must be provided. Supported values: '
-      '${enumValues.values.join(', ')}',
-    );
-  }
-
-  return enumValues.entries.singleWhere(
-    (e) => e.value == source,
-    orElse: () {
-      if (unknownValue == null) {
-        throw ArgumentError(
-          '`$source` is not one of the supported values: '
-          '${enumValues.values.join(', ')}',
-        );
-      }
-      return MapEntry(unknownValue, enumValues.values.first);
-    },
-  ).key;
-}
 
 const _$ActivityEnumMap = {
   Activity.login: 'login',

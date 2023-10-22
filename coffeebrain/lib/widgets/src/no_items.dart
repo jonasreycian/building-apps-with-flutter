@@ -12,7 +12,7 @@ class NoItems extends StatelessWidget {
     return Center(
       child: Text(
         title ?? 'No items',
-        style: Theme.of(context).textTheme.headline2,
+        style: Theme.of(context).textTheme.displayMedium,
       ),
     );
   }

@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-enum CoffeeAddition {
+enum CoffeeAdditionEnum {
   cake,
   icecream,
   cheese,
 }
 
-extension CoffeeAdditionExtension on CoffeeAddition {
+extension CoffeeAdditionExtension on CoffeeAdditionEnum {
   IconData get iconData {
     switch (this) {
-      case CoffeeAddition.cake:
+      case CoffeeAdditionEnum.cake:
         return Icons.cake;
-      case CoffeeAddition.icecream:
+      case CoffeeAdditionEnum.icecream:
         return FontAwesomeIcons.iceCream;
-      case CoffeeAddition.cheese:
+      case CoffeeAdditionEnum.cheese:
         return FontAwesomeIcons.cheese;
       default:
         return Icons.close;

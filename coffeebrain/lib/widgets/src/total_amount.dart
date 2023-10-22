@@ -23,11 +23,11 @@ class TotalAmount extends StatelessWidget {
           children: [
             Text(
               'total:',
-              style: Theme.of(context).textTheme.headline6,
+              style: Theme.of(context).textTheme.titleLarge,
             ),
             Text(
               '\$${cartTotal.toString()}',
-              style: Theme.of(context).textTheme.headline6,
+              style: Theme.of(context).textTheme.titleLarge,
             ),
           ],
         ),

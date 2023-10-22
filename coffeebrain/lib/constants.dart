@@ -12,7 +12,7 @@ final Color facebookColor = Color(0xFF4867AA);
 final List<Coffee> coffees = [
   Coffee(
       id: '1',
-      icon: FontAwesomeIcons.coffee.codePoint,
+      icon: FontAwesomeIcons.mugSaucer.codePoint,
       name: "Espresso ",
       price: 8),
   Coffee(
@@ -22,23 +22,23 @@ final List<Coffee> coffees = [
       price: 10),
   Coffee(
       id: '1',
-      icon: FontAwesomeIcons.cocktail.codePoint,
+      icon: FontAwesomeIcons.martiniGlassCitrus.codePoint,
       name: "Mocha",
       price: 12),
   Coffee(
       id: '1',
-      icon: FontAwesomeIcons.beer.codePoint,
+      icon: FontAwesomeIcons.beerMugEmpty.codePoint,
       name: "Americano",
       price: 7),
   Coffee(
     id: '1',
-    icon: FontAwesomeIcons.cocktail.codePoint,
+    icon: FontAwesomeIcons.martiniGlassCitrus.codePoint,
     name: "Italian Macchiato",
     price: 5,
   ),
   Coffee(
       id: '1',
-      icon: FontAwesomeIcons.coffee.codePoint,
+      icon: FontAwesomeIcons.mugSaucer.codePoint,
       name: "Flat White",
       price: 3),
   Coffee(
@@ -49,7 +49,7 @@ final List<Coffee> coffees = [
   ),
   Coffee(
       id: '1',
-      icon: FontAwesomeIcons.coffee.codePoint,
+      icon: FontAwesomeIcons.mugSaucer.codePoint,
       name: "Long Black",
       price: 4),
   Coffee(
@@ -59,28 +59,28 @@ final List<Coffee> coffees = [
       price: 12),
   Coffee(
     id: '1',
-    icon: FontAwesomeIcons.cocktail.codePoint,
+    icon: FontAwesomeIcons.martiniGlassCitrus.codePoint,
     name: "American Espresso",
     price: 9,
   ),
   Coffee(
       id: '1',
-      icon: FontAwesomeIcons.beer.codePoint,
+      icon: FontAwesomeIcons.beerMugEmpty.codePoint,
       name: "CAFÈ AU LAIT.",
       price: 10),
   Coffee(
       id: '1',
-      icon: FontAwesomeIcons.coffee.codePoint,
+      icon: FontAwesomeIcons.mugSaucer.codePoint,
       name: "AFFÈ MOCHA.",
       price: 12),
   Coffee(
       id: '1',
-      icon: FontAwesomeIcons.beer.codePoint,
+      icon: FontAwesomeIcons.beerMugEmpty.codePoint,
       name: "Americano",
       price: 7),
   Coffee(
     id: '1',
-    icon: FontAwesomeIcons.cocktail.codePoint,
+    icon: FontAwesomeIcons.martiniGlassCitrus.codePoint,
     name: "Double Exspersso",
     price: 5,
   ),

@@ -63,7 +63,7 @@ class CoffeeSize extends StatelessWidget {
     );
   }
 
-  getColor(bool isSelected) {
+  Color getColor(bool isSelected) {
     return isSelected ? Colors.brown.shade800 : Colors.grey.shade400;
   }
 }

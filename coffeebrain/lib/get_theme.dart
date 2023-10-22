@@ -6,28 +6,28 @@ import 'constants.dart';
 ThemeData getTheme() {
   return ThemeData(
     textTheme: TextTheme(
-      headline1: TextStyle(
+      displayLarge: TextStyle(
         color: darkBrown,
         fontFamily: GoogleFonts.lacquer().fontFamily,
       ),
-      headline2: TextStyle(
+      displayMedium: TextStyle(
         color: darkBrown,
         fontFamily: GoogleFonts.lacquer().fontFamily,
       ),
-      headline3: TextStyle(color: darkBrown),
-      headline4: TextStyle(color: darkBrown),
-      headline5: TextStyle(
+      displaySmall: TextStyle(color: darkBrown),
+      headlineMedium: TextStyle(color: darkBrown),
+      headlineSmall: TextStyle(
         color: darkBrown,
         fontFamily: GoogleFonts.lacquer().fontFamily,
       ),
-      headline6: TextStyle(color: darkBrown),
-      caption: TextStyle(color: darkBrown),
-      bodyText1: TextStyle(color: darkBrown),
-      subtitle1: TextStyle(color: darkBrown),
-      subtitle2: TextStyle(color: darkBrown),
-      bodyText2: TextStyle(color: darkBrown),
-      overline: TextStyle(color: darkBrown),
-      button: TextStyle(color: darkBrown),
+      titleLarge: TextStyle(color: darkBrown),
+      bodySmall: TextStyle(color: darkBrown),
+      bodyLarge: TextStyle(color: darkBrown),
+      titleMedium: TextStyle(color: darkBrown),
+      titleSmall: TextStyle(color: darkBrown),
+      bodyMedium: TextStyle(color: darkBrown),
+      labelSmall: TextStyle(color: darkBrown),
+      labelLarge: TextStyle(color: darkBrown),
     ),
     scaffoldBackgroundColor: Colors.white,
     fontFamily: GoogleFonts.lato().fontFamily,
@@ -36,11 +36,16 @@ ThemeData getTheme() {
       color: Colors.white,
       elevation: 0.0,
       centerTitle: true,
-      textTheme: TextTheme(
-        headline6: TextStyle(
+      toolbarTextStyle: TextTheme(
+        titleLarge: TextStyle(
           color: Colors.brown,
         ),
-      ),
+      ).bodyMedium,
+      titleTextStyle: TextTheme(
+        titleLarge: TextStyle(
+          color: Colors.brown,
+        ),
+      ).titleLarge,
     ),
   );
 }

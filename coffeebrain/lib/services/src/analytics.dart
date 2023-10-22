@@ -1,11 +1,8 @@
-// ignore: import_of_legacy_library_into_null_safe
 import 'package:firebase_analytics/firebase_analytics.dart';
-// ignore: import_of_legacy_library_into_null_safe
-import 'package:firebase_analytics/observer.dart';
 import 'package:wiredbrain/enums/enums.dart';
 
 class AnalyticsService {
-  final FirebaseAnalytics _analytics = FirebaseAnalytics();
+  final FirebaseAnalytics _analytics = FirebaseAnalytics.instance;
 
   // Singleton setup: prevents multiple instances of this class.
   factory AnalyticsService() => _service;
@@ -27,12 +24,14 @@ class AnalyticsService {
     required String itemCategory,
     required int quantity,
   }) async {
-    return _analytics.logAddToCart(
-      itemId: itemId,
-      itemName: itemName,
-      itemCategory: itemCategory,
-      quantity: quantity,
-    );
+    return _analytics.logAddToCart(items: [
+      AnalyticsEventItem(
+        itemId: itemId,
+        itemName: itemName,
+        itemCategory: itemCategory,
+        quantity: quantity,
+      )
+    ]);
   }
 
   Future<void> logPlaceOrder({
@@ -56,7 +55,7 @@ class AnalyticsService {
     required String userId,
     required List<UserRole> userRoles,
   }) async {
-    await _analytics.setUserId(userId);
+    await _analytics.setUserId(id: userId);
     await _analytics.setUserProperty(
       name: 'user_role', // custom userProperty
       value:

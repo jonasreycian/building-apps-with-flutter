@@ -1,9 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:wiredbrain/coffee_router.dart';
 import 'package:wiredbrain/enums/enums.dart';
 import 'package:wiredbrain/screens/home.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:wiredbrain/services/services.dart';
@@ -93,7 +91,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   );
                   print(_messagingService.userDeviceToken);
                   await _firestoreService.deleteUserToken(
-                    token: _messagingService.userDeviceToken,
+                    token: _messagingService.userDeviceToken!,
                     userId: _authService.currentUser!.uid,
                   );
                   await _analyticsService.logLogoutPressed();

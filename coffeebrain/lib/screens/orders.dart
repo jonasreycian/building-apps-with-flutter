@@ -13,9 +13,9 @@ class OrdersScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<List<Order>>(
+    return StreamBuilder<List<OrderItem>>(
       stream: _firestoreService.getUserOrders(_authService.currentUser!.uid),
-      builder: (context, AsyncSnapshot<List<Order>> snapshot) {
+      builder: (context, AsyncSnapshot<List<OrderItem>> snapshot) {
         if (snapshot.hasError) {
           return NoItems(title: 'No Orders!');
         }
@@ -36,7 +36,7 @@ class OrdersScreen extends StatelessWidget {
                   leading: Icon(order.status.iconData, color: brown),
                   title: Text(
                     order.status.name.toUpperCase(),
-                    style: Theme.of(context).textTheme.headline4,
+                    style: Theme.of(context).textTheme.headlineMedium,
                   ),
                   subtitle: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,

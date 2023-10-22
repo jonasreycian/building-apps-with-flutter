@@ -9,20 +9,20 @@ class CoffeeAdditions extends StatelessWidget {
     this.lessSpace = false,
   }) : super(key: key);
 
-  final List<CoffeeAddition> additions;
+  final List<CoffeeAdditionEnum> additions;
   final bool lessSpace;
-  final Function(List<CoffeeAddition>) onPressed;
+  final Function(List<CoffeeAdditionEnum>) onPressed;
 
   get hasCake {
-    return additions.contains(CoffeeAddition.cake);
+    return additions.contains(CoffeeAdditionEnum.cake);
   }
 
   get hasIceCream {
-    return additions.contains(CoffeeAddition.icecream);
+    return additions.contains(CoffeeAdditionEnum.icecream);
   }
 
   get hasCheese {
-    return additions.contains(CoffeeAddition.cheese);
+    return additions.contains(CoffeeAdditionEnum.cheese);
   }
 
   @override
@@ -41,40 +41,40 @@ class CoffeeAdditions extends StatelessWidget {
         ],
         IconButton(
           icon: Icon(
-            CoffeeAddition.cake.iconData,
+            CoffeeAdditionEnum.cake.iconData,
             color: getColor(hasCake),
           ),
           onPressed: () {
-            toggle(hasCake, CoffeeAddition.cake);
+            toggle(hasCake, CoffeeAdditionEnum.cake);
           },
         ),
         IconButton(
           icon: Icon(
-            CoffeeAddition.icecream.iconData,
-            color: getColor(additions.contains(CoffeeAddition.icecream)),
+            CoffeeAdditionEnum.icecream.iconData,
+            color: getColor(additions.contains(CoffeeAdditionEnum.icecream)),
           ),
           onPressed: () {
-            toggle(hasIceCream, CoffeeAddition.icecream);
+            toggle(hasIceCream, CoffeeAdditionEnum.icecream);
           },
         ),
         IconButton(
           icon: Icon(
-            CoffeeAddition.cheese.iconData,
-            color: getColor(additions.contains(CoffeeAddition.cheese)),
+            CoffeeAdditionEnum.cheese.iconData,
+            color: getColor(additions.contains(CoffeeAdditionEnum.cheese)),
           ),
           onPressed: () {
-            toggle(hasCheese, CoffeeAddition.cheese);
+            toggle(hasCheese, CoffeeAdditionEnum.cheese);
           },
         ),
       ],
     );
   }
 
-  getColor(bool isSelected) {
+  Color getColor(bool isSelected) {
     return isSelected ? Colors.brown.shade800 : Colors.grey.shade400;
   }
 
-  toggle(bool selected, CoffeeAddition addition) {
+  void toggle(bool selected, CoffeeAdditionEnum addition) {
     if (selected) {
       final newList = additions.where((item) => item != addition).toList();
       onPressed(newList);

@@ -35,7 +35,7 @@ class HomeScreen extends StatelessWidget {
             ),
             Text(
               "Get the best coffee!",
-              style: Theme.of(context).textTheme.headline2,
+              style: Theme.of(context).textTheme.displayMedium,
               textAlign: TextAlign.center,
             ),
             Row(

@@ -1,19 +1,18 @@
-import 'package:json_annotation/json_annotation.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:wiredbrain/enums/enums.dart';
 
+part 'firestore_user.freezed.dart';
 part 'firestore_user.g.dart';
 
-@JsonSerializable()
-class FirestoreUser {
-  const FirestoreUser({
-    required this.roles,
-  });
+@freezed
+class FirestoreUser with _$FirestoreUser {
+  const FirestoreUser._();
 
-  final List<UserRole> roles;
+  const factory FirestoreUser({required List<UserRole> roles}) = _FirestoreUser;
 
   bool get isCustomer => roles.contains(UserRole.customer);
   bool get isAdmin => roles.contains(UserRole.admin);
 
-  factory FirestoreUser.fromJson(Map<String, dynamic> json) => _$FirestoreUserFromJson(json);
-  Map<String, dynamic> toJson() => _$FirestoreUserToJson(this);
+  factory FirestoreUser.fromJson(Map<String, dynamic> json) =>
+      _$FirestoreUserFromJson(json);
 }

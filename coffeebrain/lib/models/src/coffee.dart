@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:json_annotation/json_annotation.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'coffee.g.dart';
+part 'coffee.freezed.dart';
 
-@JsonSerializable()
-class Coffee {
-  const Coffee({
-    required this.icon,
-    required this.id,
-    required this.name,
-    required this.price,
-  });
+@freezed
+class Coffee with _$Coffee {
+  const Coffee._();
+
+  const factory Coffee({
+    required int icon,
+    required String id,
+    required String name,
+    required int price,
+  }) = _Coffee;
 
   IconData get iconData => IconData(
         icon,
@@ -18,11 +21,5 @@ class Coffee {
         fontPackage: 'font_awesome_flutter',
       );
 
-  final String id;
-  final int icon;
-  final String name;
-  final int price;
-
   factory Coffee.fromJson(Map<String, dynamic> json) => _$CoffeeFromJson(json);
-  Map<String, dynamic> toJson() => _$CoffeeToJson(this);
 }

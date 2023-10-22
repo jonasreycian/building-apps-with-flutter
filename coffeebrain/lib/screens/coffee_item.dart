@@ -48,11 +48,11 @@ class CoffeeItem extends StatelessWidget {
               contentPadding: EdgeInsets.all(15),
               title: Text(
                 newCoffee.name,
-                style: Theme.of(context).textTheme.headline5,
+                style: Theme.of(context).textTheme.headlineSmall,
               ),
               subtitle: Text(
                 newCoffee.name,
-                style: Theme.of(context).textTheme.subtitle2,
+                style: Theme.of(context).textTheme.titleSmall,
               ),
               leading: Icon(
                 newCoffee.iconData,

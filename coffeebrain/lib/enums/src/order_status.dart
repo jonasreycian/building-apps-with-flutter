@@ -18,7 +18,7 @@ extension OrderStatuseExtension on OrderStatus {
   IconData get iconData {
     switch (this) {
       case OrderStatus.pending:
-        return FontAwesomeIcons.truckLoading;
+        return FontAwesomeIcons.truckRampBox;
       case OrderStatus.preparing:
         return FontAwesomeIcons.clock;
       case OrderStatus.ready:
@@ -26,7 +26,7 @@ extension OrderStatuseExtension on OrderStatus {
       case OrderStatus.delivered:
         return FontAwesomeIcons.userCheck;
       case OrderStatus.canceled:
-        return FontAwesomeIcons.windowClose;
+        return FontAwesomeIcons.rectangleXmark;
       default:
         return Icons.close;
     }

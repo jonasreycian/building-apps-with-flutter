@@ -31,9 +31,9 @@ class CoffeeCartExtraInfo extends StatelessWidget {
           ),
           Divider(height: 1),
           CoffeeAdditions(
-            onPressed: (_) {},
             lessSpace: true,
             additions: item.additions,
+            onPressed: (_) {},
           ),
         ],
       ),

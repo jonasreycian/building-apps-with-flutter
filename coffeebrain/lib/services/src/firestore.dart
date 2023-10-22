@@ -30,6 +30,7 @@ class FirestoreService {
       },
     );
   }
+
   Future<void> deleteUserToken({
     required String token,
     required String userId,
@@ -58,7 +59,8 @@ class FirestoreService {
       (QuerySnapshot querySnapshot) {
         return querySnapshot.docs.map(
           (QueryDocumentSnapshot snapshot) {
-            final Map<String, dynamic> data = snapshot.data()!;
+            final Map<String, dynamic> data =
+                snapshot.data()! as Map<String, dynamic>;
 
             data['id'] = snapshot.id;
 
@@ -100,7 +102,8 @@ class FirestoreService {
       (QuerySnapshot querySnapshot) {
         return querySnapshot.docs.map(
           (QueryDocumentSnapshot snapshot) {
-            final Map<String, dynamic> data = snapshot.data()!;
+            final Map<String, dynamic> data =
+                snapshot.data()! as Map<String, dynamic>;
 
             data['id'] = snapshot.id;
 
@@ -118,7 +121,8 @@ class FirestoreService {
 
     return snapshots.map(
       (DocumentSnapshot snapshot) {
-        final Map<String, dynamic> data = snapshot.data()!;
+        final Map<String, dynamic> data =
+            snapshot.data()! as Map<String, dynamic>;
 
         data['id'] = snapshot.id;
 
@@ -131,7 +135,7 @@ class FirestoreService {
     final String path = ApiPath.user(userId);
     final DocumentSnapshot document = await _firebaseFirestore.doc(path).get();
 
-    final Map<String, dynamic> json = document.data()!;
+    final Map<String, dynamic> json = document.data()! as Map<String, dynamic>;
 
     return FirestoreUser.fromJson(json);
   }
@@ -206,7 +210,8 @@ class FirestoreService {
     }
   }
 
-  Stream<List<Order>> getUserOrders(String userId) {
+  // TODO: Try to use pagination
+  Stream<List<OrderItem>> getUserOrders(String userId) {
     final String path = ApiPath.orders;
     final Query query = _firebaseFirestore
         .collection(path)
@@ -217,11 +222,12 @@ class FirestoreService {
       (QuerySnapshot querySnapshot) {
         return querySnapshot.docs.map(
           (QueryDocumentSnapshot snapshot) {
-            final Map<String, dynamic> data = snapshot.data()!;
+            final Map<String, dynamic> data =
+                snapshot.data()! as Map<String, dynamic>;
 
             data['id'] = snapshot.id;
 
-            return Order.fromJson(data);
+            return OrderItem.fromJson(data);
           },
         ).toList();
       },
@@ -232,16 +238,19 @@ class FirestoreService {
     final String ordersPath = ApiPath.orders;
     final CollectionReference orderCollection =
         _firebaseFirestore.collection(ordersPath);
-    final order = Order(
+
+    final OrderItem order = OrderItem(
       items: cartItems,
       userId: uid,
       status: OrderStatus.pending,
       created: DateTime.now(),
       updated: DateTime.now(),
     );
+
     // place an order
     final DocumentReference orderCreated =
         await orderCollection.add(order.toJson());
+
     // clear user cart
     final String userCartPath = ApiPath.userCart(uid);
     final CollectionReference cartCollection =
@@ -250,6 +259,7 @@ class FirestoreService {
     for (CartItem item in cartItems) {
       await cartCollection.doc(item.id).delete();
     }
+
     return orderCreated.id;
   }
 }

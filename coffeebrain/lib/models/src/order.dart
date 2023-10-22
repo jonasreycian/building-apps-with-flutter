@@ -1,35 +1,27 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:json_annotation/json_annotation.dart';
-import 'package:wiredbrain/helpers/helpers.dart';
-import 'package:wiredbrain/enums/enums.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
+import '../../enums/enums.dart';
+import '../../helpers/helpers.dart';
 import 'cart_item.dart';
+import 'date_time_converter.dart';
 
+part 'order.freezed.dart';
 part 'order.g.dart';
 
-@JsonSerializable(explicitToJson: true)
-class Order {
-  const Order({
-    required this.items,
-    this.id,
-    required this.status,
-    required this.userId,
-    required this.created,
-    required this.updated,
-  });
+@freezed
+class OrderItem with _$OrderItem {
+  const OrderItem._();
 
-  final List<CartItem> items;
-  final OrderStatus status;
-  // order id
-  final String? id;
-  // user id
-  final String userId;
-
-  @JsonKey(fromJson: _fromJson, toJson: _toJson)
-  final DateTime created;
-
-  @JsonKey(fromJson: _fromJson, toJson: _toJson)
-  final DateTime updated;
+  @DateTimeConverter()
+  const factory OrderItem({
+    String? id,
+    required List<CartItem> items,
+    required OrderStatus status,
+    required String userId,
+    required DateTime created,
+    required DateTime updated,
+  }) = _OrderItem;
 
   bool get isReady => status == OrderStatus.ready;
 
@@ -45,9 +37,17 @@ class Order {
       )
       .reduce((value, element) => value + element);
 
-  factory Order.fromJson(Map<String, dynamic> json) => _$OrderFromJson(json);
-  Map<String, dynamic> toJson() => _$OrderToJson(this);
+  factory OrderItem.fromJson(Map<String, dynamic> json) =>
+      _$OrderItemFromJson(json);
+}
 
-  static DateTime _fromJson(Timestamp timestamp) => timestamp.toDate();
-  static FieldValue _toJson(DateTime time) => FieldValue.serverTimestamp();
+@JsonEnum(valueField: 'code')
+enum StatusCodeEnhanced {
+  success(200),
+  movedPermanently(301),
+  found(302),
+  internalServerError(500);
+
+  const StatusCodeEnhanced(this.code);
+  final int code;
 }

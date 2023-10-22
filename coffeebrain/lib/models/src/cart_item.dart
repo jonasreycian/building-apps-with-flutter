@@ -1,28 +1,24 @@
-import 'package:json_annotation/json_annotation.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:wiredbrain/helpers/helpers.dart';
 import 'package:wiredbrain/enums/enums.dart';
 
 import 'coffee.dart';
+
+part 'cart_item.freezed.dart';
 part 'cart_item.g.dart';
 
-@JsonSerializable(explicitToJson: true)
-class CartItem {
-  CartItem({
-    this.id,
-    required this.coffee,
-    required this.size,
-    required this.quantity,
-    required this.sugar,
-    required this.additions,
-  });
+@freezed
+class CartItem with _$CartItem {
+  const CartItem._();
 
-  // firebase document ID
-  final String? id;
-  final Coffee coffee;
-  final CoffeeCupSize size;
-  final CoffeeSugarCube sugar;
-  final int quantity;
-  final List<CoffeeAddition> additions;
+  const factory CartItem({
+    String? id,
+    required Coffee coffee,
+    required CoffeeCupSize size,
+    required CoffeeSugarCube sugar,
+    required int quantity,
+    required List<CoffeeAdditionEnum> additions,
+  }) = _CartItem;
 
   num get total => getCartItemTotal(
         count: quantity,
@@ -32,6 +28,6 @@ class CartItem {
         sugar: sugar.index,
       );
 
-  factory CartItem.fromJson(Map<String, dynamic> json) => _$CartItemFromJson(json);
-  Map<String, dynamic> toJson() => _$CartItemToJson(this);
+  factory CartItem.fromJson(Map<String, dynamic> json) =>
+      _$CartItemFromJson(json);
 }

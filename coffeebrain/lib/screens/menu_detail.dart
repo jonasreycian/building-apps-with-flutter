@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:wiredbrain/coffee_router.dart';
-import 'package:wiredbrain/constants.dart';
-import 'package:wiredbrain/helpers/helpers.dart';
-import 'package:wiredbrain/enums/enums.dart';
-import 'package:wiredbrain/models/models.dart';
-import 'package:wiredbrain/services/services.dart';
-import 'package:wiredbrain/widgets/widgets.dart';
+
+import '../coffee_router.dart';
+import '../constants.dart';
+import '../enums/enums.dart';
+import '../helpers/helpers.dart';
+import '../models/models.dart';
+import '../services/services.dart';
+import '../widgets/widgets.dart';
 
 class MenuDetails extends StatefulWidget {
   const MenuDetails({
@@ -38,7 +39,7 @@ class _MenuDetailsState extends State<MenuDetails> {
   int quantity = 1;
   CoffeeCupSize size = CoffeeCupSize.medium;
   CoffeeSugarCube sugar = CoffeeSugarCube.no;
-  List<CoffeeAddition> additions = [CoffeeAddition.cake];
+  List<CoffeeAdditionEnum> additions = [CoffeeAdditionEnum.cake];
 
   @override
   Widget build(BuildContext context) {
@@ -106,7 +107,8 @@ class _MenuDetailsState extends State<MenuDetails> {
                         Divider(height: 3),
                         CoffeeAdditions(
                           additions: additions,
-                          onPressed: (List<CoffeeAddition> coffeeAdditions) {
+                          onPressed:
+                              (List<CoffeeAdditionEnum> coffeeAdditions) {
                             setState(() {
                               additions = coffeeAdditions;
                             });
@@ -171,13 +173,11 @@ class _MenuDetailsState extends State<MenuDetails> {
     );
   }
 
-  num total(price) {
-    return getCartItemTotal(
-      count: quantity,
-      price: price,
-      additions: additions.length,
-      size: size.index,
-      sugar: sugar.index,
-    );
-  }
+  num total(price) => getCartItemTotal(
+        count: quantity,
+        price: price,
+        additions: additions.length,
+        size: size.index,
+        sugar: sugar.index,
+      );
 }

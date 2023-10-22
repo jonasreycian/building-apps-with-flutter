@@ -70,7 +70,7 @@ class MessagingService {
     showAlertDialog(remoteMessage.messageId ?? '');
   }
 
-  get userDeviceToken {
+  String? get userDeviceToken {
     return _token;
   }
 

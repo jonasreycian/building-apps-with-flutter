@@ -29,6 +29,7 @@ class AuthService {
     } catch (e) {
       showAlertDialog(e.toString());
     }
+    return null;
   }
 
   Future<User?> signInWithEmailAndPassword({
@@ -52,6 +53,7 @@ class AuthService {
     } catch (e) {
       showAlertDialog(e.toString());
     }
+    return null;
   }
 
   Future<void> sendPasswordResetEmail({
@@ -68,16 +70,17 @@ class AuthService {
     required String newPassword,
   }) {
     currentUser?.updatePassword(newPassword);
+    return null;
   }
 
   Future<void>? updateProfile({
     required String photoURL,
     required String displayName,
   }) {
-    currentUser?.updateProfile(
-      photoURL: photoURL,
-      displayName: displayName,
-    );
+    return Future.value([
+      currentUser?.updateDisplayName(displayName),
+      currentUser?.updatePhotoURL(photoURL)
+    ]);
   }
 
   Future<User?> createUserWithEmailAndPassword({
@@ -101,6 +104,7 @@ class AuthService {
     } catch (e) {
       showAlertDialog(e.toString());
     }
+    return null;
   }
 
   Future<String?> signInWithPhoneNumber(String phone) async {
@@ -112,6 +116,7 @@ class AuthService {
     } catch (e) {
       showAlertDialog(e.toString());
     }
+    return null;
   }
 
   Future<User?> signInWithGoogle() async {
@@ -139,6 +144,7 @@ class AuthService {
     } catch (e) {
       showAlertDialog(e.toString());
     }
+    return null;
   }
 
   Future<bool> isAppleSignInAvailable() {
@@ -208,6 +214,7 @@ class AuthService {
     } catch (e) {
       showAlertDialog(e.toString());
     }
+    return null;
   }
 
   Future<void> signOut() async {

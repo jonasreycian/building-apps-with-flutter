@@ -21,7 +21,7 @@ class LoginInputs extends StatelessWidget {
           controller: emailFieldController,
           decoration: InputDecoration(
             labelText: 'Username',
-            hintText: 'me@majidhajian.com',
+            hintText: 'me@jonasreycian.com',
             labelStyle: TextStyle(color: darkBrown),
             enabledBorder: UnderlineInputBorder(
               borderSide: BorderSide(
