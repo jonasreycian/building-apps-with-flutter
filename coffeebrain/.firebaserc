@@ -1,2 +1,5 @@
 {
+  "projects": {
+    "default": "coffee-8e709"
+  }
 }

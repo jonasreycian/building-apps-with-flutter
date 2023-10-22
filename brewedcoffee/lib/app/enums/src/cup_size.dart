@@ -3,8 +3,8 @@ enum CoffeeCupSizeEnum {
   medium(30),
   large(36);
 
-  const CoffeeCupSizeEnum(this.size);
-  final int size;
+  const CoffeeCupSizeEnum(this.iconSize);
+  final double? iconSize;
 
   bool get isSmall => this == CoffeeCupSizeEnum.small;
   bool get isMedium => this == CoffeeCupSizeEnum.medium;

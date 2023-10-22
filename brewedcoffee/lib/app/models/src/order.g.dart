@@ -23,7 +23,7 @@ _$OrderItemImpl _$$OrderItemImplFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$$OrderItemImplToJson(_$OrderItemImpl instance) =>
     <String, dynamic>{
       'items': instance.items,
-      'status': _$OrderStatusEnumEnumMap[instance.status]!,
+      'status': _$OrderStatusEnumEnumMap[instance.status],
       'userId': instance.userId,
       'created': const DateTimeConverter().toJson(instance.created),
       'updated': const DateTimeConverter().toJson(instance.updated),

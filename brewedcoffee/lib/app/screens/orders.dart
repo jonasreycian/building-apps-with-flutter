@@ -1,0 +1,68 @@
+import 'package:brewedcoffee/app/constants.dart';
+import 'package:brewedcoffee/app/models/models.dart';
+import 'package:brewedcoffee/app/services/services.dart';
+import 'package:brewedcoffee/app/widgets/widgets.dart';
+import 'package:flutter/material.dart';
+
+class OrdersScreen extends StatelessWidget {
+  OrdersScreen({super.key});
+
+  static String routeName = 'Orders';
+
+  final FirestoreService _firestoreService = FirestoreService.instance;
+  final AuthService _authService = AuthService.instance;
+
+  @override
+  Widget build(BuildContext context) {
+    return StreamBuilder<List<OrderItem>>(
+      stream: _firestoreService.getUserOrders(_authService.currentUser!.uid),
+      builder: (context, AsyncSnapshot<List<OrderItem>> snapshot) {
+        if (snapshot.hasError) {
+          return const NoItems(title: 'No Orders!');
+        }
+        if (snapshot.connectionState == ConnectionState.active) {
+          if (snapshot.hasData) {
+            final orders = snapshot.data!;
+
+            if (orders.isEmpty) {
+              return const NoItems(title: 'No Orders!');
+            }
+            return ListView.builder(
+              itemCount: orders.length,
+              itemBuilder: (context, index) {
+                final order = orders[index];
+
+                return ExpansionTile(
+                  tilePadding: const EdgeInsets.all(15),
+                  leading: Icon(order.status.iconData, color: brown),
+                  title: Text(
+                    order.status.name.toUpperCase(),
+                    style: Theme.of(context).textTheme.headlineMedium,
+                  ),
+                  subtitle: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('Order Id: ${order.id ?? ''}'),
+                      Text('Updated: ${order.updated}'),
+                    ],
+                  ),
+                  expandedAlignment: Alignment.centerLeft,
+                  childrenPadding: const EdgeInsets.all(15),
+                  children: [
+                    ...order.items.map(
+                      (item) => CoffeeCartExtraInfo(item: item),
+                    ),
+                    TotalAmount(cartTotal: order.total),
+                  ],
+                );
+              },
+            );
+          }
+        }
+        return const Center(
+          child: CircularProgressIndicator(),
+        );
+      },
+    );
+  }
+}

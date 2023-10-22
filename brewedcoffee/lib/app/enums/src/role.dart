@@ -8,4 +8,6 @@ enum UserRoleEnum {
   const UserRoleEnum();
 
   String get name => describeEnum(this);
+
+  bool get isCustomer => this == UserRoleEnum.customer;
 }

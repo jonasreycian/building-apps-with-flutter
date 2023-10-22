@@ -21,8 +21,8 @@ _$CartItemImpl _$$CartItemImplFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$$CartItemImplToJson(_$CartItemImpl instance) =>
     <String, dynamic>{
       'coffee': instance.coffee,
-      'size': _$CoffeeCupSizeEnumEnumMap[instance.size]!,
-      'sugar': _$SugarCubeEnumEnumMap[instance.sugar]!,
+      'size': _$CoffeeCupSizeEnumEnumMap[instance.size],
+      'sugar': _$SugarCubeEnumEnumMap[instance.sugar],
       'quantity': instance.quantity,
       'additions': instance.additions
           .map((e) => _$CoffeeAdditionEnumEnumMap[e]!)

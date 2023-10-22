@@ -1,4 +1,7 @@
-import 'package:brewedcoffee/app/enums/src/activity.dart';
+import 'package:brewedcoffee/app/coffee_router.dart';
+import 'package:brewedcoffee/app/enums/enums.dart';
+import 'package:brewedcoffee/app/screens/home.dart';
+import 'package:brewedcoffee/app/screens/menu.dart';
 import 'package:brewedcoffee/app/services/services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -49,6 +52,7 @@ class _SplashScreenState extends State<SplashScreen> {
       () {
         if (_authService.currentUser != null) {
           final userId = _authService.currentUser!.uid;
+
           _firestoreService
             ..setUserLastLoginTimestamp(userId)
             ..addLog(
@@ -56,9 +60,9 @@ class _SplashScreenState extends State<SplashScreen> {
               userId: userId,
             );
 
-          // CoffeeRouter.instance.pushReplacement(MenuScreen.route());
+          CoffeeRouter.instance.pushReplacement(MenuScreen.route());
         } else {
-          // CoffeeRouter.instance.pushReplacement(HomeScreen.route());
+          CoffeeRouter.instance.pushReplacement(HomeScreen.route());
         }
       },
     );
