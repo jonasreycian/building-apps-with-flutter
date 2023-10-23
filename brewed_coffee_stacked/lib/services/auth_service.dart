@@ -1,12 +1,18 @@
 import 'dart:convert';
 import 'dart:math';
+
 import 'package:crypto/crypto.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
+import 'package:stacked_services/stacked_services.dart';
+
+import '../app/app.dialogs.dart';
+import '../app/app.locator.dart';
 
 class AuthService {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  final DialogService _dialogService = locator<DialogService>();
 
   // Singleton setup: prevents multiple instances of this class.
   AuthService._();
@@ -24,9 +30,15 @@ class AuthService {
       final userCredential = await _firebaseAuth.signInAnonymously();
       return userCredential.user;
     } on FirebaseAuthException catch (e) {
-      showAlertDialog(e.message ?? 'SignIn failed');
+      _dialogService.showCustomDialog(
+        variant: DialogType.alert,
+        description: e.message ?? 'SignIn failed',
+      );
     } catch (e) {
-      showAlertDialog(e.toString());
+      _dialogService.showCustomDialog(
+        variant: DialogType.alert,
+        description: e.toString(),
+      );
     }
     return null;
   }
@@ -42,15 +54,19 @@ class AuthService {
       );
       return userCredential.user;
     } on FirebaseAuthException catch (e) {
+      String description = e.message ?? 'SignIn failed';
+
       if (e.code == 'user-not-found') {
-        showAlertDialog('No user found for that email.');
+        description = "No user found for that email.";
       } else if (e.code == 'wrong-password') {
-        showAlertDialog('Wrong password provided for that user.');
-      } else {
-        showAlertDialog(e.message ?? 'SignIn failed');
+        description = "Wrong password provided for that user.";
       }
+
+      _dialogService.showCustomDialog(
+          variant: DialogType.alert, description: description);
     } catch (e) {
-      showAlertDialog(e.toString());
+      _dialogService.showCustomDialog(
+          variant: DialogType.alert, description: e.toString());
     }
     return null;
   }
@@ -75,8 +91,8 @@ class AuthService {
   Future<void>? updateProfile({
     required String photoURL,
     required String displayName,
-  }) {
-    return Future.value([
+  }) async {
+    Future.value([
       currentUser?.updateDisplayName(displayName),
       currentUser?.updatePhotoURL(photoURL)
     ]);
@@ -93,15 +109,17 @@ class AuthService {
       );
       return userCredential.user;
     } on FirebaseAuthException catch (e) {
-      if (e.code == 'weak-password') {
-        showAlertDialog('The password provided is too weak.');
-      } else if (e.code == 'email-already-in-use') {
-        showAlertDialog('The account already exists for that email.');
-      } else {
-        showAlertDialog(e.message ?? 'SignUp failed');
-      }
+      String description = switch (e.code) {
+        "weak-password" => "The password provided is too weak.",
+        "email-already-in-use" => "The account already exists for that email.",
+        _ => e.message ?? "SignUp failed",
+      };
+
+      _dialogService.showCustomDialog(
+          variant: DialogType.alert, description: description);
     } catch (e) {
-      showAlertDialog(e.toString());
+      _dialogService.showCustomDialog(
+          variant: DialogType.alert, description: e.toString());
     }
     return null;
   }
@@ -113,7 +131,8 @@ class AuthService {
 
       return confirmationResult.verificationId;
     } catch (e) {
-      showAlertDialog(e.toString());
+      _dialogService.showCustomDialog(
+          variant: DialogType.alert, description: e.toString());
     }
     return null;
   }
@@ -139,9 +158,12 @@ class AuthService {
         return userCredential.user;
       }
     } on FirebaseAuthException catch (e) {
-      showAlertDialog(e.message ?? 'SignIn with Google failed');
+      _dialogService.showCustomDialog(
+          variant: DialogType.alert,
+          description: e.message ?? 'SignIn with Google failed');
     } catch (e) {
-      showAlertDialog(e.toString());
+      _dialogService.showCustomDialog(
+          variant: DialogType.alert, description: e.toString());
     }
     return null;
   }
@@ -206,12 +228,15 @@ class AuthService {
       //
     } on SignInWithAppleAuthorizationException catch (e) {
       if (e.code != AuthorizationErrorCode.unknown) {
-        showAlertDialog(e.message);
+        _dialogService.showCustomDialog(
+            variant: DialogType.alert, description: e.message);
       }
     } on FirebaseAuthException catch (e) {
-      showAlertDialog(e.message ?? 'SignIn failed');
+      _dialogService.showCustomDialog(
+          variant: DialogType.alert, description: e.message ?? 'SignIn failed');
     } catch (e) {
-      showAlertDialog(e.toString());
+      _dialogService.showCustomDialog(
+          variant: DialogType.alert, description: e.toString());
     }
     return null;
   }

@@ -17,7 +17,7 @@ _$UserLogImpl _$$UserLogImplFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$$UserLogImplToJson(_$UserLogImpl instance) =>
     <String, dynamic>{
-      'activity': _$ActivityEnumEnumMap[instance.activity],
+      'activity': _$ActivityEnumEnumMap[instance.activity]!,
       'created': const DateTimeConverter().toJson(instance.created),
       'userId': instance.userId,
       'id': instance.id,

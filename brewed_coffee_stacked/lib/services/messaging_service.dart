@@ -1,7 +1,12 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:stacked_services/stacked_services.dart';
+
+import '../app/app.dialogs.dart';
+import '../app/app.locator.dart';
 
 class MessagingService {
   final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
+  final DialogService _dialogService = locator<DialogService>();
 
   // Singleton setup: prevents multiple instances of this class.
   MessagingService._();
@@ -56,9 +61,10 @@ class MessagingService {
         print('Message data: ${message.data}');
         // custom message data: {price: 10, coffee: latte2}
         if (message.notification != null) {
-          showAlertDialog(
-            message.notification!.body ?? '',
-            message.notification?.title,
+          _dialogService.showCustomDialog(
+            variant: DialogType.alert,
+            title: message.notification?.title,
+            description: message.notification?.body,
           );
         }
       },
@@ -66,7 +72,10 @@ class MessagingService {
   }
 
   void showMessage(RemoteMessage remoteMessage) {
-    showAlertDialog(remoteMessage.messageId ?? '');
+    _dialogService.showCustomDialog(
+      variant: DialogType.alert,
+      description: remoteMessage.messageId ?? '',
+    );
   }
 
   String? get userDeviceToken {
