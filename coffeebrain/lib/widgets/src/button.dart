@@ -41,7 +41,8 @@ class CommonButton extends StatelessWidget {
           EdgeInsets.fromLTRB(55, 15, 55, 15),
         ),
         shape: MaterialStateProperty.all(
-          StadiumBorder(),
+          // StadiumBorder(),
+          OvalBorder(),
         ),
       ),
     );

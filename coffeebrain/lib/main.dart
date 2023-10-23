@@ -16,10 +16,10 @@ bool get isInDebugMode {
 }
 
 Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-
   // Flutter >= 1.17 and Dart >= 2.8
   runZonedGuarded<Future<void>>(() async {
+    WidgetsFlutterBinding.ensureInitialized();
+
     await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 
     await Firebase.initializeApp(
@@ -42,8 +42,6 @@ Future<void> main() async {
     }
   });
 
-  // You only need to call this method if you need the binding to be initialized before calling runApp.
-  WidgetsFlutterBinding.ensureInitialized();
   // This captures errors reported by the Flutter framework.
   FlutterError.onError = (FlutterErrorDetails details) async {
     final dynamic exception = details.exception;

@@ -114,6 +114,15 @@ class FirestoreService {
     );
   }
 
+  Future<void> addCoffee(Coffee coffee) async {
+    final String path = ApiPath.coffees;
+    final CollectionReference collection = _firebaseFirestore.collection(path);
+
+    final DocumentReference document = collection.doc();
+    final newCoffee = coffee.copyWith(id: document.id);
+    await document.set(newCoffee.toJson());
+  }
+
   Stream<Coffee> getCoffee(String id) {
     final String path = ApiPath.coffee(id);
     final Stream<DocumentSnapshot> snapshots =

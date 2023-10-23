@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:wiredbrain/constants.dart';
+import 'package:wiredbrain/models/models.dart';
 
 import '../coffee_router.dart';
 import '../enums/enums.dart';
@@ -61,11 +63,27 @@ class _SplashScreenState extends State<SplashScreen> {
             userId: userId,
           );
 
+          _validateCoffees();
+
           CoffeeRouter.instance.pushReplacement(MenuScreen.route());
         } else {
           CoffeeRouter.instance.pushReplacement(HomeScreen.route());
         }
       },
     );
+  }
+
+  Future<void> _validateCoffees() async {
+    final Stream<List<Coffee>> coffeesStream =
+        await _firestoreService.getCoffees();
+
+    final List<Coffee> coffeeList = await coffeesStream.first;
+    print('_validateCoffees: ${coffeeList}');
+
+    if (coffeeList.isEmpty || coffeeList.length != coffees.length) {
+      coffees.forEach((Coffee coffee) {
+        _firestoreService.addCoffee(coffee);
+      });
+    }
   }
 }

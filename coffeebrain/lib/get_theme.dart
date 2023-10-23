@@ -32,7 +32,7 @@ ThemeData getTheme() {
     scaffoldBackgroundColor: Colors.white,
     fontFamily: GoogleFonts.lato().fontFamily,
     appBarTheme: AppBarTheme(
-      iconTheme: IconThemeData(color: Colors.brown),
+      iconTheme: IconThemeData(color: Colors.brown.shade400),
       color: Colors.white,
       elevation: 0.0,
       centerTitle: true,

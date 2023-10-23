@@ -52,7 +52,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                   decoration: InputDecoration(
                     labelText: 'Username',
                     hintText: 'me@majidhajian.com',
-                    labelStyle: TextStyle(color: darkBrown),
+                    labelStyle: Theme.of(context).textTheme.labelSmall,
                     enabledBorder: UnderlineInputBorder(
                       borderSide: BorderSide(
                         color: Colors.grey.shade400,
